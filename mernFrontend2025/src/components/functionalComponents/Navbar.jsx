@@ -1,49 +1,63 @@
-import { Link } from "react-router-dom";
-// import "./Navbar.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Navbar() {
+  const [isLearningDropdownOpen, setIsLearningDropdownOpen] = useState(false);
+  const [isHooksDropdownOpen, setIsHooksDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSectionClick = (sectionId) => {
+    navigate(`/learn-react#${sectionId}`);
+    setIsLearningDropdownOpen(false);
+    setIsHooksDropdownOpen(false);
+  };
+
   return (
-    <>    <nav>
-          
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/learn-react">Learning React</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                
+    <nav className="navbar">
+      <div className="nav-brand">
+        <Link to="/">SECE MERN</Link>
+      </div>
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li 
+          className="dropdown"
+          onMouseEnter={() => setIsLearningDropdownOpen(true)}
+          onMouseLeave={() => setIsLearningDropdownOpen(false)}
+        >
+          <Link to="/learn-react" className="dropdown-toggle">
+            Learning React <span className="arrow">▼</span>
+          </Link>
+          {isLearningDropdownOpen && (
+            <ul className="dropdown-menu">
+              <li><button onClick={() => handleSectionClick('props')}>Props</button></li>
+              <li><button onClick={() => handleSectionClick('state')}>State</button></li>
             </ul>
-        </nav>
-        
-    </>
+          )}
+        </li>
+        <li 
+          className="dropdown"
+          onMouseEnter={() => setIsHooksDropdownOpen(true)}
+          onMouseLeave={() => setIsHooksDropdownOpen(false)}
+        >
+          <span className="dropdown-toggle">
+            Hooks <span className="arrow">▼</span>
+          </span>
+          {isHooksDropdownOpen && (
+            <ul className="dropdown-menu">
+              <li><button onClick={() => handleSectionClick('usestate')}>useState Hook</button></li>
+              <li><button onClick={() => handleSectionClick('useeffect')}>useEffect Hook</button></li>
+              <li><button onClick={() => handleSectionClick('useref')}>useRef Hook</button></li>
+              <li><button onClick={() => handleSectionClick('usememo')}>useMemo Hook</button></li>
+              <li><button onClick={() => handleSectionClick('usecallback')}>useCallback Hook</button></li>
+            </ul>
+          )}
+        </li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/login">Login</Link></li>
+      </ul>
+    </nav>
   )
 }
-export default Navbar
-// import Props from "./Props"
-// import Chocolate from "./Chocolate"
-// import State from "./State"
-// import Home from "./Home"
 
-// function Navbar() {
-//   return (
-//     <>
-//         <nav>
-//             <ul>
-//                 <Link to=""></>li>Home</li></Link>
-//                 <li>About</li>
-//                 <li>Learning React</li>
-//                 <li>Contact</li>
-//             </ul>
-//         </nav>
-//         <p>The above content is Navbar</p>
-        
-//         <div>
-//             <Home/>
-//             <Props hi="Welcome to Props" grade="12" com="17" img="vite.svg"/>
-//             <State/>
-//             <Chocolate choc1="Dairy Milk" choc2="Kit Kat" choc3="Milky Bar"/>
-//         </div>
-//     </>
-//   )
-// }
-// export default Navbar
+export default Navbar

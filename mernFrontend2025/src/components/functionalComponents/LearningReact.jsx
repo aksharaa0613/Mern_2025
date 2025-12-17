@@ -6,31 +6,72 @@ import UseEffectAPI from "./Hooks/UseEffectAPI";
 import UseRef from "./Hooks/UseRef";
 import UseMemo from "./Hooks/UseMemo";
 import UseCallback from "./Hooks/UseCallback";
-
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 const LearningReact =()=>{
+    const location = useLocation();
+    const hash = location.hash.substring(1);
+    
+    useEffect(() => {
+        if (hash) {
+            const element = document.getElementById(hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [hash]);
+
+    const showHooks = ['usestate', 'useeffect', 'useref', 'usememo', 'usecallback'].includes(hash);
+    const showBasics = !hash || ['props', 'state'].includes(hash);
+
     return(
-        <div>
+        <div className="learning-react-container">
             <h1>Learning React</h1>
-            <p>This is a simple React Component</p>
+            <p>This is a comprehensive guide to React concepts and hooks</p>
             
-            <section>
-                <h2>Props Example</h2>
-                <Props hi="Welcome to Props" grade="12" age="17" img="vite.svg"/>
-            </section>
+            {showBasics && (
+                <>
+                    <section id="props">
+                        <h2>Props Example</h2>
+                        <Props hi="Welcome to Props" grade="12" age="17" img="public/vite.svg"/>
+                    </section>
+                    
+                    <section id="state">
+                        <h2>State Example</h2>
+                        <State/><hr />
+                    </section>
+                </>
+            )}
             
-            <section>
-                <h2>State Example</h2>
-                <State/>
-            </section>
-            <section>
-                <h2>UseState Example</h2>
-                <UseState/><hr />
-                <UseEffect/><hr />
-                <UseEffectAPI/><hr />
-                <UseRef/><hr />
-                <UseMemo/><hr />
-                <UseCallback/><hr />
-            </section>
+            {showHooks && (
+                <>
+                    <section id="usestate">
+                        <h2>useState Hook</h2>
+                        <UseState/><hr />
+                    </section>
+                    
+                    <section id="useeffect">
+                        <h2>useEffect Hook</h2>
+                        <UseEffect/><hr />
+                        <UseEffectAPI/><hr />
+                    </section>
+                    
+                    <section id="useref">
+                        <h2>useRef Hook</h2>
+                        <UseRef/><hr />
+                    </section>
+                    
+                    <section id="usememo">
+                        <h2>useMemo Hook</h2>
+                        <UseMemo/><hr />
+                    </section>
+                    
+                    <section id="usecallback">
+                        <h2>useCallback Hook</h2>
+                        <UseCallback/>
+                    </section>
+                </>
+            )}
         </div>
     )
 }

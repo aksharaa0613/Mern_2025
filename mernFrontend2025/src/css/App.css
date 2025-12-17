@@ -1,42 +1,195 @@
-#root {
-  max-width: 1280px;
+.h2{
+  background-color: rgb(146, 252, 246);
+  color: red;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(139,69,19,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-brand a {
+  color: #f8f4ff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
   margin: 0;
-  padding: 2rem;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  color: #f8f4ff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255,255,255,0.2);
+  color: #e6e6fa;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle .arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: linear-gradient(135deg, #b19cd9, #9b59b6);
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(139,69,19,0.2);
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  list-style: none;
+  margin: 0;
+  z-index: 1001;
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  padding: 0.75rem 1rem;
+  display: block;
+  color: #f8f4ff;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+  width: 100%;
   text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.dropdown-toggle {
+  color: #f8f4ff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.dropdown-toggle:hover {
+  background-color: rgba(255,255,255,0.2);
+  color: #e6e6fa;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: rgba(255,255,255,0.3);
+  color: #f8f4ff;
+}
+
+/* Learning React Container */
+.learning-react-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #f8f4ff, #e6e6fa);
+  min-height: 100vh;
+}
+
+.learning-react-container h1 {
+  color: #663399;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.learning-react-container > p {
+  text-align: center;
+  color: #8b7d9b;
+  margin-bottom: 2rem;
+}
+
+.learning-react-container section {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(139,69,19,0.15);
+  border: 1px solid rgba(153,102,204,0.2);
+}
+
+.learning-react-container section h2 {
+  color: #9966cc;
+  border-bottom: 2px solid #9966cc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.learning-react-container hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #dda0dd, transparent);
+  margin: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .nav-links {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background-color: #2c3e50;
+    margin-top: 0.5rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  
+  .learning-react-container {
+    padding: 1rem;
+  }
 }
