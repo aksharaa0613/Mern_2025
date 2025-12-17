@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
   res.send("Server started successfully");
 });
 
+app.get("/signup", (req, res) => {
+  res.send("Signup page - Use POST method to create account");
+});
+
 app.post("/signup", async (req, res) => {
   const { email, username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -67,6 +71,13 @@ app.post("/login", async (req, res) => {
       isLoggedIn: false,
     });
   }
+});
+
+app.get('/getallsignup',(req,res)=>{
+  const signup = Signup.find();
+  console.log(signup);
+  res.send("Data fetched");
+
 });
 
 app.get("/json", (req, res) => {
