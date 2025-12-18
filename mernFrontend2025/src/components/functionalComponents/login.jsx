@@ -24,7 +24,11 @@ const Login = () => {
         navigate("/");
       }
     } catch (e) {
-      alert("Login Failed: " + e.message);
+      if (e.response && e.response.data && e.response.data.message) {
+        alert("Login Failed: " + e.response.data.message);
+      } else {
+        alert("Login Failed: " + e.message);
+      }
     }
   };
 
@@ -51,7 +55,7 @@ const Login = () => {
       </form>
 
       <p>
-        Create an account? <Link to="/Signup">Signup</Link>
+        Create an account? <Link to="/signup">Signup</Link>
       </p>
     </div>
   );

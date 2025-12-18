@@ -25,7 +25,11 @@ const Signup = () => {
         navigate("/login");
       }
     } catch (e) {
-      alert("Signup Failed: " + e.message);
+      if (e.response && e.response.data && e.response.data.message) {
+        alert("Signup Failed: " + e.response.data.message);
+      } else {
+        alert("Signup Failed: " + e.message);
+      }
     }
   };
 
@@ -39,6 +43,7 @@ const Signup = () => {
             type="email"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </label>
         <br />
@@ -49,6 +54,7 @@ const Signup = () => {
             type="text"
             name="username"
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </label>
         <br />
@@ -59,6 +65,7 @@ const Signup = () => {
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </label>
         <br />
