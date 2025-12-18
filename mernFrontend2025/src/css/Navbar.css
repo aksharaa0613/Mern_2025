@@ -1,7 +1,7 @@
 nav {
   display: flex;
   list-style-type: none;
-  background-color: pink;
+  background-color: purple;
   color: aliceblue;
   justify-content: space-around;
   padding: 10px;
