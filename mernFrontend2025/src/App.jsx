@@ -6,47 +6,36 @@ import About from "./components/functionalComponents/About";
 import LearningReact from "./components/functionalComponents/LearningReact";
 import Contact from "./components/functionalComponents/Contact";
 import Login from "./components/functionalComponents/login";
-
+import Signup from "./components/functionalComponents/Signup";
+import UseState from "./components/functionalComponents/Hooks/UseState";
+import UseEffect from "./components/functionalComponents/Hooks/UseEffect";
+import UseEffectAPI from "./components/functionalComponents/Hooks/UseEffectAPI";
+import UseRef from "./components/functionalComponents/Hooks/UseRef";
+import UseMemo from "./components/functionalComponents/Hooks/UseMemo";
+import UseCallback from "./components/functionalComponents/Hooks/UseCallback";
 
 function App() {
-  // const h1Style={
-  //   backgroundColor:"lightblue",
-  //   textAlign:"center",
-  //   color:"white"
-  // };
-const h1Style={
-  backgroundColor:"pink",
-  color:"blue"
-}
   return (
-     <div style={{textAlign: 'left', margin: '0', padding: '0'}}>
-      <main>
+    <header>
       <BrowserRouter>
-        <Navbar/>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/learn-react" element={<LearningReact/>}/>
-          <Route path="/contact" element={<Contact/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Home />}/>
+          <Route path="/about" element={<About />}/>
+          <Route path="/use-state" element={<UseState />}/>
+          <Route path="/use-effect" element={<UseEffect />} />
+          <Route path="/use-effect-api" element={<UseEffectAPI />} />
+          <Route path="/use-ref" element={<UseRef />} />
+          <Route path="/use-memo" element={<UseMemo />} />
+          <Route path="/use-callback" element={<UseCallback />}/>
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
-        </main>
-   {/* <div>
-    <h1 style={h1Style}>Welcome to JSX</h1>
-    <h2 className="h2">This is a simple React Component</h2>
-    <img src="vite.svg" alt="" style={{marginLeft:"100px",width:"500px",height:"500px"}}/>
-    </div> */}
-    </div>
-    // {/* <div>
-    //    <h1 style={{backgroundColor:"blue",textAlign:"center",color:"white"}}>Welcome to JSX</h1>
-    //    <h2 style={{backgroundColor:"yellow",textAlign:"center"}}>This is a simple React Component!!!🫠</h2>
-    //    <ClassComponents/>
-    //    <img src="vite.svg" alt="random image" style={{marginLeft:"100px",width:"500px"}}/>
-    // </div> */}
-    
-  )
-  
+    </header>
+  );
 }
 
-export default App
+export default App;
+

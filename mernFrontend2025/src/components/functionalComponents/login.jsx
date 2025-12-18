@@ -1,44 +1,60 @@
-import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
-function Login() {
-    const [isSignup, setIsSignup] = useState(false);
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    return (
-        <div className="login-container">
-            <h1>{isSignup ? 'Signup' : 'Login'}</h1>
-            <form onSubmit={(e) => e.preventDefault()}>
-                {isSignup && (
-                    <>
-                        <div className="form-group">
-                            <label htmlFor="email">Email:</label>
-                            <input type="email" name="email" id="email" required />
-                        </div>
-                        <br />
-                    </>
-                )}
-                <div className="form-group">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" id="username" required />
-                </div>
-                <br />
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" id="password" required />
-                </div>
-                <br />
-                <button type="submit">{isSignup ? 'Signup' : 'Login'}</button>
-                <p>
-                    {isSignup ? 'Already have an account?' : "Don't have an account?"}
-                    <button 
-                        type="button" 
-                        onClick={() => setIsSignup(!isSignup)}
-                        style={{background: 'none', border: 'none', color: 'blue', textDecoration: 'underline', cursor: 'pointer', marginLeft: '5px'}}
-                    >
-                        {isSignup ? 'Login' : 'Signup'}
-                    </button>
-                </p>
-            </form>
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      const req = await axios.post("https://mern-2025-1.onrender.com/login", {
+        email,
+        password,
+      });
+
+      const { message, isLoggedIn } = req.data;
+
+      if (isLoggedIn) {
+        localStorage.setItem("isLogin", "true");
+        alert(message);
+        navigate("/");
+      }
+    } catch (e) {
+      alert("Login Failed: " + e.message);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login Page</h2>
+
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email:</label>
+          <input type="email" onChange={(e) => setEmail(e.target.value)} required />
         </div>
-    );
-}
+
+        <br />
+
+        <div>
+          <label>Password:</label>
+          <input type="password" onChange={(e) => setPassword(e.target.value)} required />
+        </div>
+
+        <br />
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p>
+        Create an account? <Link to="/Signup">Signup</Link>
+      </p>
+    </div>
+  );
+};
+
 export default Login;

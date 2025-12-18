@@ -1,63 +1,86 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "../../css/Navbar.css";
 
 function Navbar() {
-  const [isLearningDropdownOpen, setIsLearningDropdownOpen] = useState(false);
-  const [isHooksDropdownOpen, setIsHooksDropdownOpen] = useState(false);
+  const [dropdown, showDropdown] = useState(false);
   const navigate = useNavigate();
+  const isLogin = localStorage.getItem("isLogin") === "true";
 
-  const handleSectionClick = (sectionId) => {
-    navigate(`/learn-react#${sectionId}`);
-    setIsLearningDropdownOpen(false);
-    setIsHooksDropdownOpen(false);
+  const handleLogout = () => {
+    localStorage.setItem("isLogin", "false");
+    alert("Logout Successful");
+    navigate("/login");
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-brand">
-        <Link to="/">SECE MERN</Link>
+    <nav>
+      <Link to="/" className="link">
+        <li>Home</li>
+      </Link>
+      <Link to="/about" className="link">
+        <li>About</li>
+      </Link>
+      <div
+        className="dropdown"
+        onMouseEnter={() => showDropdown(!dropdown)}
+        onMouseLeave={() => showDropdown(!dropdown)}
+      >
+        <span className="link">Learning React</span>
+        {dropdown && (
+          <ol className="dropdown-list">
+            <li>
+              <Link to="/use-state" className="dropdown-link">
+                useState
+              </Link>
+            </li>
+            <li>
+              <Link to="/use-effect" className="dropdown-link">
+                useEffect
+              </Link>
+            </li>
+            <li>
+              <Link to="/use-effect-api" className="dropdown-link">
+                useEffectWithAPI
+              </Link>
+            </li>
+            <li>
+              <Link to="/use-ref" className="dropdown-link">
+                useRef
+              </Link>
+            </li>
+            <li>
+
+              <Link to="/use-memo" className="dropdown-link">
+
+                useMemo
+              </Link>
+            </li>
+            <li>
+
+              <Link to="/use-callback" className="dropdown-link">
+
+                useCallback
+              </Link>
+            </li>
+          </ol>
+        )}
       </div>
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li 
-          className="dropdown"
-          onMouseEnter={() => setIsLearningDropdownOpen(true)}
-          onMouseLeave={() => setIsLearningDropdownOpen(false)}
-        >
-          <Link to="/learn-react" className="dropdown-toggle">
-            Learning React <span className="arrow">▼</span>
-          </Link>
-          {isLearningDropdownOpen && (
-            <ul className="dropdown-menu">
-              <li><button onClick={() => handleSectionClick('props')}>Props</button></li>
-              <li><button onClick={() => handleSectionClick('state')}>State</button></li>
-            </ul>
-          )}
-        </li>
-        <li 
-          className="dropdown"
-          onMouseEnter={() => setIsHooksDropdownOpen(true)}
-          onMouseLeave={() => setIsHooksDropdownOpen(false)}
-        >
-          <span className="dropdown-toggle">
-            Hooks <span className="arrow">▼</span>
-          </span>
-          {isHooksDropdownOpen && (
-            <ul className="dropdown-menu">
-              <li><button onClick={() => handleSectionClick('usestate')}>useState Hook</button></li>
-              <li><button onClick={() => handleSectionClick('useeffect')}>useEffect Hook</button></li>
-              <li><button onClick={() => handleSectionClick('useref')}>useRef Hook</button></li>
-              <li><button onClick={() => handleSectionClick('usememo')}>useMemo Hook</button></li>
-              <li><button onClick={() => handleSectionClick('usecallback')}>useCallback Hook</button></li>
-            </ul>
-          )}
-        </li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li>
-      </ul>
+      <Link to="/contact" className="link">
+
+        <li>Contact</li>
+      </Link>
+      {isLogin ? (
+        <span className="link" onClick={handleLogout}>
+          Logout
+        </span>
+      ) : (
+        <Link to="/login" className="link">
+          <li>Login</li>
+        </Link>
+      )}
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

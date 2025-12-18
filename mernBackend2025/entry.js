@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors())
 
 mdb
-  .connect("mongodb://localhost:27017/seceDec2025")
+  .connect("mongodb+srv://aksharaa_db_user:Ts1DfPHxo0JdIAnJ@cluster0.kcf30eh.mongodb.net/seceDec2025")
   .then(() => console.log("MongoDB Connection Successful"))
   .catch((err) => console.log("MongoDB Connection Unsuccessful", err));
 
@@ -18,9 +18,6 @@ app.get("/", (req, res) => {
   res.send("Server started successfully");
 });
 
-app.get("/signup", (req, res) => {
-  res.send("Signup page - Use POST method to create account");
-});
 
 app.post("/signup", async (req, res) => {
   const { email, username, password } = req.body;
@@ -31,7 +28,7 @@ app.post("/signup", async (req, res) => {
     password: hashedPassword,
   });
   newSignup.save();
-  res.status(200).json({ Message: "Signup Successful", isSignup: true });
+  res.status(200).json({ "message": "Signup Successful", isSignup: true });
 });
 
 app.post("/login", async (req, res) => {
@@ -73,12 +70,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get('/getallsignup',(req,res)=>{
-  const signup = Signup.find();
+app.get('/getallsignup',async(req,res)=>{
+  const signup = await Signup.find();
   console.log(signup);
-  res.send("Data fetched");
+  res.send("Data Fetched")
 
-});
+})
 
 app.get("/json", (req, res) => {
   res.json({
